@@ -1,0 +1,106 @@
+{% extends 'products/base.html' %}
+{% load static humanize %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'vendor/css/product.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container pt-5">
+        {% if messages %}
+            <div class="d-flex justify-content-center">
+                <div class="alert alert-success alert-dismissible fade show col-lg-4"
+                     role="alert"
+                     style="margin-top: 50px;">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        {% endif %}
+        <div class="row mt-5">
+            <div class="d-flex align-items-start flex-column col-lg-4 col-md-6 mr-5">
+                <h4 class="mb-4">{{ product.name }}</h4>
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid">
+            </div>
+            <div class="align-self-center col-lg-5 col-md-6 ml-5">
+                <h6>Выберите размер:</h6>
+                <div class="btn-group mt-3" role="group" aria-label="Basic example">
+                    <form method="get" action="{% url 'products:detail_product' product.pk %}">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            {% for key, value in enable_size.items %}
+                                <button type="button" class="btn btn-secondary" onclick=postdata {% if value < 1 %}
+                                        disabled {% endif %}
+                                        value="{{ key }}">{{ key }}
+                                </button>
+                            {% endfor %}
+                        </div>
+                    </form>
+                </div>
+                <div class="card mt-5">
+                    <div class="card-body">
+                        <p class="card-text">Описание:</p>
+                        <p class="card-text">{{ product.description }}</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-end">
+                        <!-- Button trigger modal -->
+                        {% if request.session.size %}
+                            <a type="button" class="btn btn-dark disabled" data-toggle="modal"
+                               data-target="#staticBackdrop"
+                               >Купить</a>
+                        {% else %}
+                            <p>Выберите размер</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Модальное окно -->
+        <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+             aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <a type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</a>
+                    </div>
+                    <div class="modal-body">
+                        <p>{{ product.name }} - <b>{{ product.price|intcomma }} руб.</b></p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="{% url 'products:basket_add' product.id %}"
+                           class="btn btn-outline-success">
+                            Отправить в корзину
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+            crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $("button").click(function (e) {
+            e.preventDefault();
+            let size = $(this).val();
+            $("button").removeClass("active");
+            $(this).addClass("active");
+            $("a").removeClass("disabled");
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                dataType: "json",
+                data: {
+                    "size": size,
+                },
+            });
+        });
+    </script>
+{% endblock %}
