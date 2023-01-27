@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9c19ed2c-395f-4ec9-906f-139617292a43" name="Changes" comment="final version project(course)" />
+    <list default="true" id="9c19ed2c-395f-4ec9-906f-139617292a43" name="Changes" comment="final version project(course)">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -268,7 +273,9 @@
       <workItem from="1674731524015" duration="29464000" />
       <workItem from="1674814992420" duration="9736000" />
       <workItem from="1674826130834" duration="736000" />
-      <workItem from="1674826890942" duration="1224000" />
+      <workItem from="1674826890942" duration="1540000" />
+      <workItem from="1674828709986" duration="582000" />
+      <workItem from="1674860771384" duration="1601000" />
     </task>
     <task id="LOCAL-00001" summary="first version">
       <created>1673528209858</created>
@@ -356,6 +363,16 @@
           <url>file://$PROJECT_DIR$/products/views.py</url>
           <line>64</line>
           <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/users/views.py</url>
+          <line>82</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/users/views.py</url>
+          <line>78</line>
+          <option name="timeStamp" value="24" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

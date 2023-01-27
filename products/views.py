@@ -60,13 +60,10 @@ class ProductDetailView(SuccessMessageMixin, DetailView):
 
 @login_required
 def basket_add(request, product_id):
-    if request.user.is_verified_email:
-        size = request.session.get('size')
-        Basket.update_or_create_basket(product_id, request.user, size)
-        messages.success(request, 'Товар добавлен в корзину!')
-        return HttpResponseRedirect(reverse('products:detail_product', args=(product_id,)))
-    else:
-        return HttpResponseRedirect(reverse('users:email_activation'))
+    size = request.session.get('size')
+    Basket.update_or_create_basket(product_id, request.user, size)
+    messages.success(request, 'Товар добавлен в корзину!')
+    return HttpResponseRedirect(reverse('products:detail_product', args=(product_id,)))
 
 
 def basket_remove(request, basket_id):

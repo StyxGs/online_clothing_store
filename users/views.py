@@ -19,11 +19,11 @@ class UserLoginView(CommandContextMixin, LoginView):
     title = 'Store - Вход'
 
     def form_valid(self, form):
-        auth_login(self.request, form.get_user())
         if form.user_cache.is_verified_email:
+            auth_login(self.request, form.get_user())
             return HttpResponseRedirect(self.get_success_url())
         else:
-            return HttpResponseRedirect(reverse('users:email_activation'))
+            return HttpResponseRedirect(reverse('users:email_activation', args=(form.user_cache.id,)))
 
 
 class RegistrationsView(CommandContextMixin, SuccessMessageMixin, CreateView):
@@ -73,10 +73,15 @@ class EmailResending(CommandContextMixin, TemplateView):
     title = 'Store - активация электронной почты'
     template_name = 'users/email_activate.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(EmailResending, self).get_context_data(**kwargs)
+        self.request.session['user_id'] = kwargs['pk']
+        return context
+
 
 def resending_an_email(request):
-    user = User.objects.get(username=request.user)
-    email = EmailVerification.objects.get(user=user)
-    email.delete()
-    send_email_create.delay(user.id)
+    email = EmailVerification.objects.filter(user_id=request.session['user_id'])
+    if email:
+        email.first().delete()
+    send_email_create.delay(request.session['user_id'])
     return HttpResponseRedirect(reverse('index'))
