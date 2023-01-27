@@ -1,9 +1,12 @@
 # online_clothing_store
 Project online clothing store
+
 Stack:
 Python
 PostgreSQL
 Redis
+
+
 Local Developing
 All actions should be executed from the source directory of the project and only after installing all requirements.
 
