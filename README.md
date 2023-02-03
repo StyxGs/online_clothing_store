@@ -1,10 +1,11 @@
 <h1>Project online clothing store</h1>
 
-Stack:
-Python
-PostgreSQL
-Redis
-
+<h3>Stack:</h3>
+<ul>
+<li>Python</li>
+<li>PostgreSQL</li>
+<li>Redis</li>
+</ul>
 
 Local Developing
 All actions should be executed from the source directory of the project and only after installing all requirements.
