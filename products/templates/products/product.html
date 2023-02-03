@@ -29,16 +29,14 @@
             <div class="align-self-center col-lg-5 col-md-6 ml-5">
                 <h6>Выберите размер:</h6>
                 <div class="btn-group mt-3" role="group" aria-label="Basic example">
-                    <form method="get" action="{% url 'products:detail_product' product.pk %}">
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            {% for key, value in enable_size.items %}
-                                <button type="button" class="btn btn-secondary" onclick=postdata {% if value < 1 %}
-                                        disabled {% endif %}
-                                        value="{{ key }}">{{ key }}
-                                </button>
-                            {% endfor %}
-                        </div>
-                    </form>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        {% for key, value in enable_size.items %}
+                            <button type="button" class="btn btn-secondary" onclick=postdata {% if value < 1 %}
+                                    disabled {% endif %}
+                                    value="{{ key }}">{{ key }}
+                            </button>
+                        {% endfor %}
+                    </div>
                 </div>
                 <div class="card mt-5">
                     <div class="card-body">
@@ -47,13 +45,9 @@
                     </div>
                     <div class="card-footer d-flex justify-content-end">
                         <!-- Button trigger modal -->
-                        {% if request.session.size %}
-                            <a type="button" class="btn btn-dark disabled" data-toggle="modal"
-                               data-target="#staticBackdrop"
-                               >Купить</a>
-                        {% else %}
-                            <p>Выберите размер</p>
-                        {% endif %}
+                        <a type="button" class="btn btn-dark disabled" data-toggle="modal"
+                           data-target="#staticBackdrop"
+                        >Купить</a>
                     </div>
                 </div>
             </div>
@@ -94,8 +88,6 @@
             $(this).addClass("active");
             $("a").removeClass("disabled");
             $.ajax({
-                url: this.action,
-                type: this.method,
                 dataType: "json",
                 data: {
                     "size": size,

@@ -1,20 +1,21 @@
 from rest_framework import status
-from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.permissions import IsAdminUser, IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from products.models import Basket, Products
-from products.serializers import BasketSerializer, ProductSerializer
+
+from products.models import Basket, Products, Sizes
+from products.serializers import BasketSerializer, ProductSerializer, SizesSerializer
 
 
-class ProductModelViewSet(ModelViewSet):
+class ProductsModelViewSet(ModelViewSet):
     queryset = Products.objects.all()
     serializer_class = ProductSerializer
 
     def get_permissions(self):
-        if self.action != 'get':
+        if self.action in ('create', 'update', 'destroy'):
             self.permission_classes = (IsAdminUser,)
-        return super(ProductModelViewSet, self).get_permissions()
+        return super(ProductsModelViewSet, self).get_permissions()
 
 
 class BasketModelViewSet(ModelViewSet):
@@ -35,7 +36,7 @@ class BasketModelViewSet(ModelViewSet):
                 if not products.exists():
                     return Response({'product_id': 'There is no product with this ID.'},
                                     status=status.HTTP_400_BAD_REQUEST)
-                obj, is_created = Basket.update_or_create_basket(products.first().id, self.request.user)
+                obj, is_created = Basket.update_or_create_basket(product_id, self.request.user, self.request.GET['size'])
                 status_code = status.HTTP_201_CREATED if is_created else status.HTTP_200_OK
                 serializer = self.get_serializer(obj)
                 return Response(serializer.data, status=status_code)
@@ -44,3 +45,13 @@ class BasketModelViewSet(ModelViewSet):
         else:
             return Response({'email': 'Email in not verified.'}, status=status.HTTP_400_BAD_REQUEST)
 
+
+class SizesModelViewSet(ModelViewSet):
+    queryset = Sizes.objects.all()
+    serializer_class = SizesSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    pagination_class = None
+
+    def get_queryset(self):
+        queryset = super(SizesModelViewSet, self).get_queryset()
+        return queryset.filter(product_id=self.kwargs['pk'])

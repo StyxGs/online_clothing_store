@@ -13,7 +13,7 @@ class SizeAdmin(admin.TabularInline):
 
 @admin.register(Products)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'price', 'quantity', 'get_category')
+    list_display = ('name', 'price', 'get_category')
     search_fields = ('name',)
     ordering = ('price',)
     inlines = (SizeAdmin,)

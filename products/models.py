@@ -24,7 +24,6 @@ class Products(models.Model):
     image = models.ImageField(upload_to='products_images')
     description = models.TextField()
     price = models.IntegerField()
-    quantity = models.PositiveIntegerField(default=0)
     stripe_product_id = models.CharField(max_length=128, null=True, blank=True)
     category = models.ManyToManyField(Categories)
 
