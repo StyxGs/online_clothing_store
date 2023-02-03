@@ -13,8 +13,9 @@
 <ol>
 <li>Firstly, create and activate a new virtual environment:</li>
 
-<p>python3.9 -m venv ../venv</p>
-<p>source ../venv/bin/activate</p>
+<p>python3.9 -m venv ../venv
+ 
+source ../venv/bin/activate</p>
 <li>Install packages:</li>
 
 pip install --upgrade pip
