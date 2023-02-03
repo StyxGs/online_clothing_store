@@ -7,25 +7,27 @@
 <li>Redis</li>
 </ul>
 
-Local Developing
+<h3>Local Developing</h3>
 All actions should be executed from the source directory of the project and only after installing all requirements.
 
-Firstly, create and activate a new virtual environment:
+<ol>
+<li>Firstly, create and activate a new virtual environment:</li>
 
 python3.9 -m venv ../venv
 source ../venv/bin/activate
-Install packages:
+<li>Install packages:</li>
 
 pip install --upgrade pip
 pip install -r requirements.txt
-Run project dependencies, migrations, fill the database with the fixture data etc.:
+<li>Run project dependencies, migrations, fill the database with the fixture data etc.:</li>
 
 ./manage.py migrate
 ./manage.py loaddata <path_to_fixture_files>
 ./manage.py runserver 
-Run Redis Server:
+<li>Run Redis Server:</li>
 
 redis-server
-Run Celery:
+<li>Run Celery:</li>
 
 celery -A store worker --loglevel=INFO
+</ol>
