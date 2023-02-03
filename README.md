@@ -12,23 +12,26 @@
 <br/>
 <ol>
 <li>Firstly, create and activate a new virtual environment:</li>
-
+<br/>
 <p>python3.9 -m venv ../venv
  
 source ../venv/bin/activate</p>
 <li>Install packages:</li>
-
-pip install --upgrade pip
-pip install -r requirements.txt
+<br/>
+<p>pip install --upgrade pip
+ 
+pip install -r requirements.txt</p>
 <li>Run project dependencies, migrations, fill the database with the fixture data etc.:</li>
-
-./manage.py migrate
+<br/>
+<p>./manage.py migrate
+ 
 ./manage.py loaddata <path_to_fixture_files>
-./manage.py runserver 
+ 
+./manage.py runserver</p>
 <li>Run Redis Server:</li>
-
+<br/>
 redis-server
 <li>Run Celery:</li>
-
+<br/>
 celery -A store worker --loglevel=INFO
 </ol>
