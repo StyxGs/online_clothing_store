@@ -1,5 +1,4 @@
-# online_clothing_store
-Project online clothing store
+<h1>Project online clothing store</h1>
 
 Stack:
 Python
