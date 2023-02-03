@@ -8,8 +8,8 @@
 </ul>
 
 <h3>Local Developing</h3>
-All actions should be executed from the source directory of the project and only after installing all requirements.
-
+<p>All actions should be executed from the source directory of the project and only after installing all requirements.</p>
+<br/>
 <ol>
 <li>Firstly, create and activate a new virtual environment:</li>
 
