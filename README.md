@@ -30,8 +30,8 @@ pip install -r requirements.txt</p>
 ./manage.py runserver</p>
 <li>Run Redis Server:</li>
 <br/>
-redis-server
+<p>redis-server</p>
 <li>Run Celery:</li>
 <br/>
-celery -A store worker --loglevel=INFO
+<p>celery -A store worker --loglevel=INFO</p>
 </ol>
