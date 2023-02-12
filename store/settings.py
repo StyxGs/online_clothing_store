@@ -213,11 +213,11 @@ LOGOUT_REDIRECT_URL = 'index'
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 else:
-    EMAIL_HOST = 'smtp.yandex.com'
-    EMAIL_PORT = 465
-    EMAIL_HOST_USER = 't3xt-server@yandex.ru'
-    EMAIL_HOST_PASSWORD = '1pd04hd6wi'
-    EMAIL_USE_SSL = True
+    EMAIL_HOST = env('EMAIL_HOST')
+    EMAIL_PORT = env('EMAIL_PORT')
+    EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+    EMAIL_USE_SSL = env('EMAIL_USE_SSL')
 
 # OAuth
 AUTHENTICATION_BACKENDS = [
